@@ -64,8 +64,8 @@ img {
     padding: 8px 30px;
     border: 2px solid #00d462;
     cursor: pointer;
-
 }
+
 .btn-round.solid-btn:hover {
     color: #31333f;
 }
@@ -262,6 +262,16 @@ input[type=radio] {
     border: 1px solid #fefefe;
     padding: 15px;
 }
+
+/*-------------------------- View books page ---------------------------- */
+.headingUnderline {
+    padding-bottom: 5px;
+    border-bottom: 4px solid #00d462;
+}
+.bookDetails {
+    padding-top: 30px;
+}
+
 /*-------------------------- Add Books Form ---------------------------- */
 .hiddenStep {
    display:none;

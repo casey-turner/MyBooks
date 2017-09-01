@@ -51,6 +51,41 @@ function editBook() {
 
 function viewBook() {
     GLOBAL $action;
+
+    if ( !empty($_GET['bookid']) ) {
+        $bookID = sanitiseUserInput($_GET['bookid']);
+    } else {
+        header('HTTP/1.1 404 Not Found');
+        exit;
+    }
+
+    $book = selectData('book', array(
+        'left join' => array('table2' => 'author', 'column' => 'authorID'),
+        'where'=> array('bookID' => $bookID ),
+        'return type' => 'single'
+        )
+    );
+
+    $plot = selectData('bookplot', array(
+        'select' => ' plot',
+        'where' => array('bookID' => $bookID),
+        'return type' => 'single'
+        )
+    );
+
+    $ranking = selectData('bookranking',  array(
+        'select' => ' rankingScore',
+        'where' => array('bookID' => $bookID),
+        'return type' => 'single'
+        )
+    );
+
+    if ($book['imageURL'] != '') {
+        $image = $book['imageURL'];
+    } else {
+        $image = 'http://localhost/mybooks/view/images/default.png';
+    }
+
     $pageTitle = "View Book | My Books";
     require_once('view/pages/head.php');
     require_once('view/pages/viewbook.php');
@@ -59,6 +94,10 @@ function viewBook() {
 
 function displaybooks() {
     GLOBAL $action;
+
+    $books = selectData('book', array('order_by'=> 'bookID'));
+    $authors = selectData('author', array('select'=> ' authorID, firstName, lastName'));
+
     $pageTitle = "Top Selling Books | My Books";
     require_once('view/pages/head.php');
     require_once('view/pages/displaybooks.php');
