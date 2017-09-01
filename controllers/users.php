@@ -31,7 +31,7 @@ switch($action) {
 }
 
 function login() {
-    GLOBAL $action;
+    GLOBAL $action, $controller;
 
     // Do authentication checks
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -76,7 +76,7 @@ function login() {
 }
 
 function register() {
-    GLOBAL $action;
+    GLOBAL $action, $controller;
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -109,7 +109,7 @@ function register() {
 }
 
 function logout() {
-    GLOBAL $action;
+    GLOBAL $action, $controller;
     session_unset();
     session_destroy();
     $pageTitle = "Login | My Books";

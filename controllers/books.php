@@ -34,7 +34,7 @@ switch($action) {
 }
 
 function addBook() {
-    GLOBAL $action, $lastInsertID, $newAuthorID;
+    GLOBAL $action, $lastInsertID, $newAuthorID, $controller;
 
     //Get author names for existing author selection
     $authors = selectData('author', array(
@@ -146,8 +146,6 @@ function addBook() {
         }
     }
 
-
-
     $pageTitle = "Add Book | My Books";
     require_once('view/pages/head.php');
     require_once('view/pages/bookform.php');
@@ -155,7 +153,37 @@ function addBook() {
 }
 
 function editBook() {
-    GLOBAL $action;
+    GLOBAL $action, $controller;
+
+    //Get Book ID from the query string
+    if ( !empty($_GET['bookid']) ) {
+        $bookID = sanitiseUserInput($_GET['bookid']);
+    } else {
+        header('HTTP/1.1 404 Not Found');
+        exit;
+    }
+
+    $book = selectData('book', array(
+        'left join' => array('table2' => 'author', 'column' => 'authorID'),
+        'where'=> array('bookID' => $bookID ),
+        'return type' => 'single'
+        )
+    );
+
+    $plot = selectData('bookplot', array(
+        'select' => ' plot, plotSource',
+        'where' => array('bookID' => $bookID),
+        'return type' => 'single'
+        )
+    );
+
+    $ranking = selectData('bookranking',  array(
+        'select' => ' rankingScore',
+        'where' => array('bookID' => $bookID),
+        'return type' => 'single'
+        )
+    );
+
     $pageTitle = "Edit Book | My Books";
     require_once('view/pages/head.php');
     require_once('view/pages/bookform.php');
@@ -163,8 +191,9 @@ function editBook() {
 }
 
 function viewBook() {
-    GLOBAL $action;
+    GLOBAL $action, $controller;
 
+    //Get Book ID from the query string
     if ( !empty($_GET['bookid']) ) {
         $bookID = sanitiseUserInput($_GET['bookid']);
     } else {
@@ -206,7 +235,7 @@ function viewBook() {
 }
 
 function displaybooks() {
-    GLOBAL $action;
+    GLOBAL $action, $controller;
 
     $books = selectData('book', array('order_by'=> 'bookID'));
     $authors = selectData('author', array('select'=> ' authorID, firstName, lastName'));
