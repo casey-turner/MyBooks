@@ -2,8 +2,6 @@
     <div class="container">
         <div class="row">
             <?php
-            $books = selectData('book', array('order_by'=> 'bookID'));
-            $authors = selectData('author', array('select'=> ' authorID, firstName, lastName'));
             if (!empty($books)) {
                 $count = 0;
                 foreach ($books as $book) {

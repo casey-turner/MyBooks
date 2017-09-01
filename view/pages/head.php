@@ -11,13 +11,13 @@
         <link href="view/css/styles.css" rel="stylesheet" type="text/css">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     </head>
-    <body>
+    <body class="<?php echo $controller.'-'.$action; ?>">
 <?php
 
 if (!($action == "register" || $action == 'login' || $action == 'logout')) { ?>
     <header class="primary-header">
         <div class="container">
-            <a href="#"><img src="view/images/logo.png" alt="My Books"></a>
+            <a href="?controller=books&action=displaybooks"><img src="view/images/logo.png" alt="My Books"></a>
             <img class="mobileMenu" src="view/images/mobile-menu.png" alt="mobile menu" />
             <nav class="primary-nav">
                 <ul>
