@@ -35,6 +35,13 @@ switch($action) {
 
 function addBook() {
     GLOBAL $action;
+
+    $authors = selectData('author', array(
+        'select' => ' authorID, firstName, lastName',
+        'order_by' => 'lastName, firstName'
+        )
+    );
+
     $pageTitle = "Add Book | My Books";
     require_once('view/pages/head.php');
     require_once('view/pages/bookform.php');

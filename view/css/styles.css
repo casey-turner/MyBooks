@@ -190,6 +190,7 @@ img {
 input[type=text],
 input[type=password],
 input[type=email],
+select,
 textarea {
     display: block;
     width: 100%;
@@ -272,11 +273,22 @@ input[type=radio] {
     padding-top: 30px;
 }
 
-/*-------------------------- Add Books Form ---------------------------- */
-.hiddenStep {
+/*-------------------------- Books Form ---------------------------- */
+.hiddenStep,
+#newAuthor,
+#existingAuthor {
    display:none;
  }
-
+.selectFieldGroup {
+    border: 1px solid #ececec;
+    background: #ececec;
+    padding: 15px 30px;
+    margin-bottom: 25px;
+    border-radius: 20px;
+}
+.formNav {
+    margin-top: 40px;
+}
 .next-btn {
     float: right;
 }

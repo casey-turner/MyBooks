@@ -21,6 +21,19 @@ $(document).ready(function() {
         $("#section-2").css("display", "block");
     });
 
+
+ // Add book form, select an existing or new author show/hide functionality
+     $('input[name=authorSelect]').change(function(){
+
+        if ($(this).val()=="existingAuthor") {
+           $('#existingAuthor').slideDown();
+            $('#newAuthor').hide();
+        } else {
+           $('#newAuthor').slideDown();
+           $('#existingAuthor').hide();
+        }
+     });
+
  // Mobile menu functionality
      $(function() {
         $( ".mobileMenu" ).click(function() {

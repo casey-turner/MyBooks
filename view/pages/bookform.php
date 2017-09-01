@@ -20,30 +20,46 @@
                             <input type="text" name="sold" value="">
                             <label>Language Written</label>
                             <input type="text" name="language" value="">
-                            <a id="section1Next" href="#" class="next-btn">Next</a>
-                            <div class="clear"></div>
+                            <div class="formNav">
+                                <a id="section1Next" href="#" class="next-btn">Next</a>
+                                <div class="clear"></div>
+                            </div>
                         </div>
                         <div id="section-2" class="hiddenStep">
-                            <label>Author</label>
-                            <div class="radio">
-                                <label><input type="radio" name="author" value="">
-                                Existing Author</label>
+                            <div class="selectionFieldGroup">
+                                <label>Author</label>
+                                <div class="radio">
+                                    <label><input type="radio" name="authorSelect" value="existingAuthor">
+                                    Existing Author</label>
+                                </div>
+                                <div class="radio">
+                                    <label><input type="radio" name="authorSelect" value="newAuthor">
+                                    New Author</label>
+                                </div>
                             </div>
-                            <div class="radio">
-                                <label><input type="radio" name="author" value="">
-                                New Author</label>
+                            <div id="existingAuthor">
+                                <select class="" name="">
+                                    <option value="" disabled selected>Select Author</option>
+                                    <?php foreach ($authors as $author) { ?>
+                                        <option value="<?php echo $author['authorID']; ?>"><?php echo $author['firstName']." ".$author['lastName']; ?></option>
+                                    <?php } ?>
+
+
+                                </select>
                             </div>
                             <div id="newAuthor">
                                 <label>First Name</label>
-                                <input type="text" name="fname" value="">
+                                <input type="text" name="firstName" value="">
                                 <label>Surname</label>
-                                <input type="text" name="surname" value="">
+                                <input type="text" name="lastName" value="">
                                 <label>Nationality</label>
                                 <input type="text" name="nationality" value="">
                                 <label>Birth Year</label>
-                                <input type="text" name="birth" value="">
+                                <input type="text" name="birthYear" value="">
                                 <label>Death Year</label>
-                                <input type="text" name="death" value="">
+                                <input type="text" name="deathYear" value="">
+                            </div>
+                            <div class="formNav">
                                 <a href="#" id="section2Prev" class="prev-btn">Prev</a>
                                 <a href="#" id="section2Next" class="next-btn">Next</a>
                             </div>
@@ -55,8 +71,10 @@
                             <input type="text" name="plotsource" value="">
                             <label>Book Ranking</label>
                             <input type="text" name="publication" value="">
-                            <a href="#" id="section3Prev" class="prev-btn">Prev</a></li>
-                            <input type="submit" name="submit" value="submit">
+                            <div class="formNav">
+                                <a href="#" id="section3Prev" class="prev-btn">Prev</a></li>
+                                <input type="submit" name="submit" value="submit">
+                            </div>
                         </div>
                     </div>
                 </form>
