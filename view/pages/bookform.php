@@ -4,22 +4,22 @@
             <div class="col-md-2">
             </div>
             <div class="col-md-8">
-                <form id="addBook" class="form-white-bkg" action="" method="post">
+                <form id="addBook" class="form-white-bkg" action="?controller=books&action=addbook" method="post">
                     <legend>Add Book</legend>
                     <div class="tabs">
                         <div id="section-1">
                             <label>Title</label>
-                            <input type="text" name="title" value="">
+                            <input type="text" name="bookTitle" value="">
                             <label>Original Title</label>
-                            <input type="text" name="originaltitle" value="">
+                            <input type="text" name="originalTitle" value="">
                             <label>Year of Publication</label>
-                            <input type="text" name="publication" value="">
+                            <input type="text" name="yearofPublication" value="">
                             <label>Genre</label>
                             <input type="text" name="genre" value="">
                             <label>Millions Sold</label>
-                            <input type="text" name="sold" value="">
+                            <input type="text" name="millionsSold" value="">
                             <label>Language Written</label>
-                            <input type="text" name="language" value="">
+                            <input type="text" name="languageWritten" value="">
                             <div class="formNav">
                                 <a id="section1Next" href="#" class="next-btn">Next</a>
                                 <div class="clear"></div>
@@ -38,13 +38,11 @@
                                 </div>
                             </div>
                             <div id="existingAuthor">
-                                <select class="" name="">
+                                <select class="" name="authorOption">
                                     <option value="" disabled selected>Select Author</option>
                                     <?php foreach ($authors as $author) { ?>
                                         <option value="<?php echo $author['authorID']; ?>"><?php echo $author['firstName']." ".$author['lastName']; ?></option>
                                     <?php } ?>
-
-
                                 </select>
                             </div>
                             <div id="newAuthor">
@@ -66,11 +64,11 @@
                         </div>
                         <div id="section-3" class="hiddenStep">
                             <label>Book Plot</label>
-                            <textarea class="form-control" rows="5"></textarea>
+                            <textarea class="form-control" rows="5" name="plot"></textarea>
                             <label>Plot Source</label>
-                            <input type="text" name="plotsource" value="">
+                            <input type="text" name="plotSource" value="">
                             <label>Book Ranking</label>
-                            <input type="text" name="publication" value="">
+                            <input type="text" name="rankingScore" value="">
                             <div class="formNav">
                                 <a href="#" id="section3Prev" class="prev-btn">Prev</a></li>
                                 <input type="submit" name="submit" value="submit">

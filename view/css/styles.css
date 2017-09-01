@@ -279,7 +279,7 @@ input[type=radio] {
 #existingAuthor {
    display:none;
  }
-.selectFieldGroup {
+.selectionFieldGroup {
     border: 1px solid #ececec;
     background: #ececec;
     padding: 15px 30px;

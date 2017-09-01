@@ -34,13 +34,119 @@ switch($action) {
 }
 
 function addBook() {
-    GLOBAL $action;
+    GLOBAL $action, $lastInsertID, $newAuthorID;
 
+    //Get author names for existing author selection
     $authors = selectData('author', array(
         'select' => ' authorID, firstName, lastName',
         'order_by' => 'lastName, firstName'
         )
     );
+
+    //Process the form to add new author information to My Books
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        if ( (!empty($_POST['authorSelect'])) && ($_POST['authorSelect'] == 'newAuthor')  ) {
+
+            //Map sanitised form inputs to variables
+            $firstName = !empty($_POST['firstName']) ? sanitiseUserInput($_POST['firstName']) : null;
+            $lastName = !empty($_POST['lastName']) ? sanitiseUserInput($_POST['lastName']) : null;
+            $nationality = !empty($_POST['nationality']) ? sanitiseUserInput($_POST['nationality']) : null;
+            $birthYear = !empty($_POST['birthYear']) ? sanitiseUserInput($_POST['birthYear']) : null;
+            $deathYear = !empty($_POST['deathYear']) ? sanitiseUserInput($_POST['deathYear']) : null;
+
+            try {
+                $authorData = array(
+                    'firstName' => $firstName,
+                    'lastName' => $lastName,
+                    'nationality' => $nationality,
+                    'birthYear' => $birthYear,
+                    'deathYear' => $deathYear
+                );
+                insertData('author', $authorData);
+            } catch (PDOexception $e) {
+                echo "Error:".$e -> getMessage();
+                die();
+            }
+
+            //Set newly created author ID for use in next insert
+            $newAuthorID = $lastInsertID;
+        } else {
+            $authorOption = isset($_POST['authorOption']) ? $_POST['authorOption'] : false;
+            $newAuthorID = $authorOption;
+        }
+
+
+        //Map sanitised form inputs to variables
+        $bookTitle = !empty($_POST['bookTitle']) ? sanitiseUserInput($_POST['bookTitle']) : null;
+        $originalTitle = !empty($_POST['originalTitle']) ? sanitiseUserInput($_POST['originalTitle']) : null;
+        $yearofPublication = !empty($_POST['yearofPublication']) ? sanitiseUserInput($_POST['yearofPublication']) : null;
+        $genre = !empty($_POST['genre']) ? sanitiseUserInput($_POST['genre']) : null;
+        $millionsSold = !empty($_POST['millionsSold']) ? sanitiseUserInput($_POST['millionsSold']) : null;
+        $languageWritten = !empty($_POST['languageWritten']) ? sanitiseUserInput($_POST['languageWritten']) : null;
+
+        try {
+            $bookData = array(
+                'bookTitle' => $bookTitle,
+                'originalTitle' => $originalTitle,
+                'yearofPublication' => $yearofPublication,
+                'genre' => $genre,
+                'millionsSold' => $millionsSold,
+                'languageWritten' => $languageWritten,
+                'authorID' => $newAuthorID
+            );
+            insertData('book', $bookData);
+        } catch (PDOexception $e) {
+            echo "Error:".$e -> getMessage();
+            die();
+        }
+
+        //Set newly created book ID for use in next insert
+        $newBookID = $lastInsertID;
+
+        //Map sanitised form inputs to variables
+        $plot = !empty($_POST['plot']) ? sanitiseUserInput($_POST['plot']) : null;
+        $plotSource = !empty($_POST['plotSource']) ? sanitiseUserInput($_POST['plotSource']) : null;
+
+        try {
+            $plotData = array(
+                'plot' => $plot,
+                'plotSource' => $plotSource,
+                'bookID' => $newBookID
+            );
+            insertData('bookplot', $plotData);
+        } catch (PDOexception $e) {
+            echo "Error:".$e -> getMessage();
+            die();
+        }
+
+        //Map sanitised form inputs to variables
+        $rankingScore = !empty($_POST['rankingScore']) ? sanitiseUserInput($_POST['rankingScore']) : null;
+
+        try {
+            $rankData = array(
+                'rankingScore' => $rankingScore,
+                'bookID' => $newBookID
+            );
+            insertData('bookranking', $rankData);
+        } catch (PDOexception $e) {
+            echo "Error:".$e -> getMessage();
+            die();
+        }
+
+        try {
+            $modifyData = array(
+                'adminID' => $_SESSION['userID'],
+                'bookID' => $newBookID
+            );
+            insertData('bookmodify', $modifyData);
+        } catch (PDOexception $e) {
+            echo "Error:".$e -> getMessage();
+            die();
+        }
+    }
+
+
 
     $pageTitle = "Add Book | My Books";
     require_once('view/pages/head.php');
