@@ -4,11 +4,10 @@
             <div class="col-md-2">
             </div>
             <div class="col-md-8">
-                <form id="addBook" class="form-white-bkg" action="?controller=books&action=addbook" method="post">
-                    <legend>Add Book</legend>
+                <form id="addBook" class="form-white-bkg" action="?controller=books&action=<?php echo $action?><?php if ($action == 'editbook') { echo '&bookid='.$book['bookID'];}?>" method="post">
+                    <legend><?php if ($action == 'addbook') { ?> Add Book <?php } else { ?>Edit Book <?php } ?> </legend>
                     <div class="tabs">
                         <div id="section-1">
-                            <label>Title</label>
                             <input type="text" name="bookTitle" value="<?php if ( isset($book['bookTitle']) ) { echo $book['bookTitle']; }?>">
                             <label>Original Title</label>
                             <input type="text" name="originalTitle" value="<?php if ( isset($book['originalTitle']) ) { echo $book['originalTitle']; }?>">
@@ -68,9 +67,9 @@
                         </div>
                         <div id="section-3" class="hiddenStep">
                             <label>Book Plot</label>
-                            <textarea class="form-control" rows="5" name="plot"><?php if ( isset($plot['plot']) ) { echo $plot['plot']; }?></textarea>
+                            <textarea class="form-control" rows="5" name="plot"><?php if ( isset($bookplot['plot']) ) { echo $bookplot['plot']; }?></textarea>
                             <label>Plot Source</label>
-                            <input type="text" name="plotSource" value="<?php if ( isset($plot['plotSource']) ) { echo $plot['plotSource']; }?>">
+                            <input type="text" name="plotSource" value="<?php if ( isset($bookplot['plotSource']) ) { echo $bookplot['plotSource']; }?>">
                             <label>Book Ranking</label>
                             <input type="text" name="rankingScore" value="<?php if ( isset($ranking['rankingScore']) ) { echo $ranking['rankingScore']; }?>">
                             <div class="formNav">

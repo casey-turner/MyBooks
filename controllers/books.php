@@ -43,7 +43,7 @@ function addBook() {
         )
     );
 
-    //Process the form to add new author information to My Books
+    //Process the form to add new author, book, plot and ranking information to My Books
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ( (!empty($_POST['authorSelect'])) && ($_POST['authorSelect'] == 'newAuthor')  ) {
@@ -170,19 +170,111 @@ function editBook() {
         )
     );
 
-    $plot = selectData('bookplot', array(
-        'select' => ' plot, plotSource',
+    $bookplot = selectData('bookplot', array(
         'where' => array('bookID' => $bookID),
         'return type' => 'single'
         )
     );
 
     $ranking = selectData('bookranking',  array(
-        'select' => ' rankingScore',
         'where' => array('bookID' => $bookID),
         'return type' => 'single'
         )
     );
+
+    //Process the form to update author, book, plot & ranking information in My Books
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        //Map sanitised form inputs to variables
+        $firstName = !empty($_POST['firstName']) ? sanitiseUserInput($_POST['firstName']) : null;
+        $lastName = !empty($_POST['lastName']) ? sanitiseUserInput($_POST['lastName']) : null;
+        $nationality = !empty($_POST['nationality']) ? sanitiseUserInput($_POST['nationality']) : null;
+        $birthYear = !empty($_POST['birthYear']) ? sanitiseUserInput($_POST['birthYear']) : null;
+        $deathYear = !empty($_POST['deathYear']) ? sanitiseUserInput($_POST['deathYear']) : null;
+
+        try {
+            $authorData = array(
+                'firstName' => $firstName,
+                'lastName' => $lastName,
+                'nationality' => $nationality,
+                'birthYear' => $birthYear,
+                'deathYear' => $deathYear
+            );
+            $updateWhere = array(
+                'authorID' => $book['authorID']
+            );
+            updateData('author', $authorData, $updateWhere);
+
+        } catch (PDOexception $e) {
+        echo "Error:".$e -> getMessage();
+        die();
+        }
+
+        //Map sanitised form inputs to variables
+        $bookTitle = !empty($_POST['bookTitle']) ? sanitiseUserInput($_POST['bookTitle']) : null;
+        $originalTitle = !empty($_POST['originalTitle']) ? sanitiseUserInput($_POST['originalTitle']) : null;
+        $yearofPublication = !empty($_POST['yearofPublication']) ? sanitiseUserInput($_POST['yearofPublication']) : null;
+        $genre = !empty($_POST['genre']) ? sanitiseUserInput($_POST['genre']) : null;
+        $millionsSold = !empty($_POST['millionsSold']) ? sanitiseUserInput($_POST['millionsSold']) : null;
+        $languageWritten = !empty($_POST['languageWritten']) ? sanitiseUserInput($_POST['languageWritten']) : null;
+
+        try {
+            $bookData = array(
+                'bookTitle' => $bookTitle,
+                'originalTitle' => $originalTitle,
+                'yearofPublication' => $yearofPublication,
+                'genre' => $genre,
+                'millionsSold' => $millionsSold,
+                'languageWritten' => $languageWritten,
+            );
+            $updateWhere = array(
+                'bookID' => $book['bookID']
+            );
+            updateData('book', $bookData, $updateWhere);
+
+        } catch (PDOexception $e) {
+        echo "Error:".$e -> getMessage();
+        die();
+        }
+
+        //Map sanitised form inputs to variables
+        $plot = !empty($_POST['plot']) ? sanitiseUserInput($_POST['plot']) : null;
+        $plotSource = !empty($_POST['plotSource']) ? sanitiseUserInput($_POST['plotSource']) : null;
+
+        try {
+            $plotData = array(
+                'plot' => $plot,
+                //'plotSource' => $plotSource,
+            );
+            $updateWhere = array(
+                'bookPlotID' => $bookplot['bookPlotID']
+            );
+            updateData('bookplot', $plotData, $updateWhere);
+
+        } catch (PDOexception $e) {
+        echo "Error:".$e -> getMessage();
+        die();
+        }
+
+        //Map sanitised form inputs to variables
+        $rankingScore = !empty($_POST['rankingScore']) ? sanitiseUserInput($_POST['rankingScore']) : null;
+
+        try {
+            $rankData = array(
+                'rankingScore' => $rankingScore,
+            );
+            $updateWhere = array(
+                'rankingID' => $ranking['rankingID']
+            );
+            updateData('bookranking', $rankData, $updateWhere);
+
+        } catch (PDOexception $e) {
+        echo "Error:".$e -> getMessage();
+        die();
+        }
+
+
+    }
 
     $pageTitle = "Edit Book | My Books";
     require_once('view/pages/head.php');

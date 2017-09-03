@@ -19,6 +19,7 @@ function sanitiseUserInput($data) {
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
+    $data = mysql_real_escape_string($data);
 	return $data;
 }
 
@@ -127,7 +128,9 @@ function updateData($table, $data, $conditions) {
             }
         }
         $sql  = "UPDATE ".$table." SET ".$colvalSet.$whereSql;
+        
         $query = $db->prepare($sql);
+
         $update = $query->execute();
     }
     return $update;
