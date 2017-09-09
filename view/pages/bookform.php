@@ -4,21 +4,21 @@
             <div class="col-md-2">
             </div>
             <div class="col-md-8">
-                <form id="addBook" class="form-white-bkg" action="?controller=books&action=<?php echo $action?><?php if ($action == 'editbook') { echo '&bookid='.$book['bookID'];}?>" method="post">
+                <form id="addBook" class="form-white-bkg" action="?controller=books&action=<?php echo $action?><?php if ($action == 'editbook') { echo '&bookid='.$book['bookID'];}?>" method="post" data-parsley-validate>
                     <legend><?php if ($action == 'addbook') { ?> Add Book <?php } else { ?>Edit Book <?php } ?> </legend>
                     <div class="tabs">
                         <div id="section-1">
-                            <input type="text" name="bookTitle" value="<?php if ( isset($book['bookTitle']) ) { echo $book['bookTitle']; }?>">
+                            <input type="text" name="bookTitle" value="<?php if ( isset($book['bookTitle']) ) { echo $book['bookTitle']; }?>" required>
                             <label>Original Title</label>
-                            <input type="text" name="originalTitle" value="<?php if ( isset($book['originalTitle']) ) { echo $book['originalTitle']; }?>">
+                            <input type="text" name="originalTitle" value="<?php if ( isset($book['originalTitle']) ) { echo $book['originalTitle']; }?>" required>
                             <label>Year of Publication</label>
-                            <input type="text" name="yearofPublication" value="<?php if ( isset($book['yearofPublication']) ) { echo $book['yearofPublication']; }?>">
+                            <input type="text" name="yearofPublication" value="<?php if ( isset($book['yearofPublication']) ) { echo $book['yearofPublication']; }?>" required>
                             <label>Genre</label>
-                            <input type="text" name="genre" value="<?php if ( isset($book['genre']) ) { echo $book['genre']; }?>">
+                            <input type="text" name="genre" value="<?php if ( isset($book['genre']) ) { echo $book['genre']; }?>" required>
                             <label>Millions Sold</label>
-                            <input type="text" name="millionsSold" value="<?php if ( isset($book['millionsSold']) ) { echo $book['millionsSold']; }?>">
+                            <input type="text" name="millionsSold" value="<?php if ( isset($book['millionsSold']) ) { echo $book['millionsSold']; }?>" required>
                             <label>Language Written</label>
-                            <input type="text" name="languageWritten" value="<?php if ( isset($book['languageWritten']) ) { echo $book['languageWritten']; }?>">
+                            <input type="text" name="languageWritten" value="<?php if ( isset($book['languageWritten']) ) { echo $book['languageWritten']; }?>" required>
                             <div class="formNav">
                                 <a id="section1Next" href="#" class="next-btn">Next</a>
                                 <div class="clear"></div>
@@ -29,7 +29,7 @@
                                 <div class="selectionFieldGroup">
                                      <label>Author</label>
                                      <div class="radio">
-                                         <label><input type="radio" name="authorSelect" value="existingAuthor">
+                                         <label><input type="radio" name="authorSelect" value="existingAuthor" required>
                                          Existing Author</label>
                                      </div>
                                      <div class="radio">
@@ -67,11 +67,11 @@
                         </div>
                         <div id="section-3" class="hiddenStep">
                             <label>Book Plot</label>
-                            <textarea class="form-control" rows="5" name="plot"><?php if ( isset($bookplot['plot']) ) { echo $bookplot['plot']; }?></textarea>
+                            <textarea class="form-control" rows="5" name="plot" required><?php if ( isset($bookplot['plot']) ) { echo $bookplot['plot']; }?></textarea>
                             <label>Plot Source</label>
-                            <input type="text" name="plotSource" value="<?php if ( isset($bookplot['plotSource']) ) { echo $bookplot['plotSource']; }?>">
+                            <input type="text" name="plotSource" value="<?php if ( isset($bookplot['plotSource']) ) { echo $bookplot['plotSource']; }?>" required>
                             <label>Book Ranking</label>
-                            <input type="text" name="rankingScore" value="<?php if ( isset($ranking['rankingScore']) ) { echo $ranking['rankingScore']; }?>">
+                            <input type="text" name="rankingScore" value="<?php if ( isset($ranking['rankingScore']) ) { echo $ranking['rankingScore']; }?>" required>
                             <div class="formNav">
                                 <a href="#" id="section3Prev" class="prev-btn">Prev</a></li>
                                 <input type="submit" name="submit" value="submit">

@@ -109,7 +109,15 @@ img {
     background-color: #00d462;
 }
 
-
+.user-btn {
+    width: 136px;
+}
+.log-btn {
+    margin-right: 6px;
+}
+.reg-btn {
+    margin-left: 6px;
+}
 
 /*-------------------------- Header ---------------------------- */
 @media (max-width: 991px) {
@@ -211,11 +219,12 @@ select,
 textarea {
     display: block;
     width: 100%;
-    border-radius: 2px;
+    border-radius: 3px;
     margin-bottom: 10px;
     padding: 7px 10px;
     border: 1px solid #999;
     outline: none;
+    height: 40px;
 }
 input[type=radio] {
     margin-right: 5px;
@@ -226,10 +235,83 @@ input[type=radio] {
     border-radius: 15px;
 }
 
-#admin-login-form legend,
-#register-form legend {
+.user-info-form  legend {
     color: #fff;
 }
+
+.input-icon {
+    height: 40px;
+    width: 40px;
+    background: #eee;
+    padding: 5px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border: 1px solid #999;
+    border-right: 0;
+}
+.input-icon img {
+    max-height: 100%;
+    max-width: 100%;
+    height: auto;
+    width: auto;
+}
+
+.user-info-form input[type=text],
+.user-info-form input[type=email],
+.user-info-form  input[type=password],
+.user-info-form  input[type=text],
+.user-info-form  input[type=email],
+.user-info-form  input[type=password] {
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+
+
+/*-------------------------- Parsley JS Form Validation ---------------------------- */
+
+input.parsley-success,
+select.parsley-success,
+textarea.parsley-success {
+  color: #468847;
+  background-color: #DFF0D8;
+  border: 1px solid #D6E9C6;
+}
+
+input.parsley-error,
+select.parsley-error,
+textarea.parsley-error {
+  color: #B94A48;
+  background-color: #F2DEDE;
+}
+
+.parsley-errors-list {
+  margin: 2px 0 3px;
+  padding: 0;
+  list-style-type: none;
+  font-size: 0.9em;
+  line-height: 0.9em;
+  opacity: 0;
+
+  transition: all .3s ease-in;
+  -o-transition: all .3s ease-in;
+  -moz-transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+}
+
+.parsley-errors-list.filled {
+  opacity: 1;
+}
+.user-info-form ul.parsley-errors-list {
+    position: absolute;
+    right: 8px;
+    top: 2px;
+}
+.user-info-form li.parsley-required {
+    color: red;
+    font-size: .85em;
+}
+
 /*-------------------------- Admin Login Page ---------------------------- */
 #admin-login-form {
     padding: 15px 30px;
@@ -242,21 +324,12 @@ input[type=radio] {
   align-items: center;
   height: 80vh;
 }
-.admin-login .btn {
-    width: 47%;
-}
 
-.admin-login a.btn {
-    margin-left: 2%;
-}
-.admin-login input[type=submit] {
-    margin-right: 2%;
-}
 
 /*-------------------------- Registration Page ---------------------------- */
 #register-form {
     padding: 15px 30px;
-    width: 650px;
+    width: 700px;
     text-align: center;
 }
 .register {
@@ -265,13 +338,21 @@ input[type=radio] {
   align-items: center;
   height: 80vh;
 }
-#register-form input {
-    width: 49%;
-    display: inline-block;
+
+#register-form .input-row {
+    margin: 0;
 }
-#register-form input[type=submit] {
-    width: auto;
-    margin-top: 15px;
+#register-form .input-group {
+    padding-left: 3px;
+    padding-right: 3px;
+}
+.reg-btn-col {
+    text-align: right;
+    padding-right: 5px;
+}
+.log-btn-col {
+    text-align: left;
+    padding-left: 5px;
 }
 /*-------------------------- Display books page ---------------------------- */
 .book-item {
@@ -349,6 +430,16 @@ input[type=radio] {
     background-color: #fff;
     padding: 2px 10px;
     line-height: 1.5;
+}
+
+/*-------------------------- Notification ---------------------------- */
+
+.notification {
+    border-left: 6px solid #00d462;
+    background-color: #fff;
+    height: 60px;
+    margin: 0 30px 30px 0;
+    box-shadow: 2px 2px 6px rgba(0,0,0,.1);
 }
 
 /*-------------------------- Footer ---------------------------- */
