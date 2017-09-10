@@ -1,4 +1,5 @@
 <?php
+//Authenticate login
 function db_authenticate($userName, $password) {
     $userLogin = selectData('users', array(
         'select'=> ' userName, password',
@@ -23,6 +24,7 @@ function sanitiseUserInput($data) {
 	return $data;
 }
 
+//Insert data function
 function insertData($table, $data){
     GLOBAL $db, $lastInsertID;
     if(!empty($data) && is_array($data)) {
@@ -43,7 +45,7 @@ function insertData($table, $data){
     return $insert;
 }
 
-
+//Select data function
 function selectData($table, $conditions = array()) {
     GLOBAL $db;
     $sql = 'SELECT';
@@ -105,6 +107,7 @@ function selectData($table, $conditions = array()) {
     return $data;
 }
 
+//Update data function
 function updateData($table, $data, $conditions) {
     GLOBAL $db;
     if (!empty($data) && is_array($data)) {
@@ -135,7 +138,7 @@ function updateData($table, $data, $conditions) {
     }
     return $update;
 }
-
+//Delete data function
 function deleteData($table, $conditions) {
     GLOBAL $db;
     $whereSql = '';
