@@ -442,6 +442,14 @@ textarea.parsley-error {
     box-shadow: 2px 2px 6px rgba(0,0,0,.1);
 }
 
+.error {
+    padding: 5px 10px;
+    border-left: 6px solid red;
+    background-color: #fff;
+    margin: 4px 4px 10px 4px;
+    text-align: left;
+    font-size: .9em;
+}
 /*-------------------------- Footer ---------------------------- */
 footer {
     color: #FFF;

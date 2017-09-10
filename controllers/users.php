@@ -86,19 +86,38 @@ function register() {
         $email = !empty($_POST['email']) ? sanitiseUserInput($_POST['email']) : null;
         $password = !empty($_POST['password']) ? password_hash(sanitiseUserInput($_POST['password']), PASSWORD_DEFAULT) : null;
 
-        try {
-            $registrationData = array(
-                'firstName' => $firstName,
-                'lastName' => $lastName,
-                'userName' => $userName,
-                'email' => $email,
-                'password' => $password
-            );
-            insertData('users', $registrationData);
-            header("location: ?controller=users&action=login");
-        } catch (PDOexception $e) {
-            echo "Error:".$e -> getMessage();
-            die();
+        $userNameCheck = selectData('users', array(
+            'where'=> array('userName' => $userName ),
+            'return type' => 'count'
+            )
+        );
+
+        if ($userNameCheck == 0) {
+            try {
+                $registrationData = array(
+                    'firstName' => $firstName,
+                    'lastName' => $lastName,
+                    'userName' => $userName,
+                    'email' => $email,
+                    'password' => $password
+                );
+
+                insertData('users', $registrationData);
+
+                $_SESSION['userstate'] = 'admin';
+                $_SESSION['userName'] = $userName;
+                $_SESSION['userID'] = $lastInsertID;
+                $_SESSION['firstName'] = $firstName;
+
+                header("location: ?controller=books&action=displaybooks");
+                $_SESSION['notification'] = 'Hi '.$firstName.', welcome to My Books.';
+                exit;
+            } catch (PDOexception $e) {
+                echo "Error:".$e -> getMessage();
+                die();
+            }
+        } else {
+            $_SESSION['error'] = $userName.' is already registered, please select a different username.';
         }
     }
 

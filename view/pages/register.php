@@ -4,6 +4,15 @@
             <img class="logo-block" src="view/images/admin-logo.png" alt="My Books" />
             <form class="user-info-form" id="register-form" method="post" action="?controller=users&action=register" data-parsley-validate>
                 <legend>Register</legend>
+                <?php
+                if ( isset($_SESSION['error']) ) { ?>
+                    <div class="error">
+                        <p><?php echo $_SESSION['error']; ?></p>
+                    </div>
+                <?php
+                    unset($_SESSION['error']);
+                }
+                ?>
                 <div class="row input-row">
                     <div class="input-group col-md-6">
                         <span class="input-icon"><img src="view/images/user.png" alt=""></span>
