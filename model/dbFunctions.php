@@ -128,11 +128,27 @@ function updateData($table, $data, $conditions) {
             }
         }
         $sql  = "UPDATE ".$table." SET ".$colvalSet.$whereSql;
-        
+
         $query = $db->prepare($sql);
 
         $update = $query->execute();
     }
     return $update;
+}
+
+function deleteData($table, $conditions) {
+    GLOBAL $db;
+    $whereSql = '';
+    if(!empty($conditions) && is_array($conditions)) {
+        $whereSql .= ' WHERE ';
+        $i = 0;
+        foreach ($conditions as $key => $value) {
+            $pre = ($i > 0 )?' AND ':'';
+            $whereSql .= $pre.$key. " = '".$value."'";
+            $i++;
+        }
+        $deleted = $db->exec("DELETE FROM ".$table.$whereSql);
+    }
+    return $deleted;
 }
  ?>

@@ -435,9 +435,9 @@ textarea.parsley-error {
 /*-------------------------- Notification ---------------------------- */
 
 .notification {
+    padding: 10px 20px;
     border-left: 6px solid #00d462;
     background-color: #fff;
-    height: 60px;
     margin: 0 30px 30px 0;
     box-shadow: 2px 2px 6px rgba(0,0,0,.1);
 }

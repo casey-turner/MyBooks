@@ -1,5 +1,14 @@
 <div class="main-wrapper">
     <div class="container">
+        <?php
+        if ( isset($_SESSION['notification']) ) { ?>
+            <div class="notification">
+                <p><?php echo $_SESSION['notification']; ?></p>
+            </div>
+        <?php
+            unset($_SESSION['notification']); 
+        }
+        ?>
         <div class="row">
             <?php
             if (!empty($books)) {
@@ -23,7 +32,7 @@
                             <i><?php echo $authorName; ?></i></p>
                             <a class="btn-square" href="?controller=books&action=viewbook&bookid=<?php echo $book['bookID']; ?>">View</a>
                             <a class="btn-square" href="?controller=books&action=editbook&bookid=<?php echo $book['bookID']; ?>">Edit</a>
-                            <a class="btn-square" href="?view=deletebook&bookid=<?php echo $book['bookID']; ?>">Delete</a>
+                            <a class="btn-square" href="?controller=books&action=deletebook&bookid=<?php echo $book['bookID']; ?>">Delete</a>
                         </div>
                     </div>
                     <?php

@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <img src="<?php echo $image; ?>" alt="">
+                <img src="<?php echo $image; ?>" alt="<?php echo $book['bookTitle'];?> Cover">
             </div>
             <div class="col-md-9">
                 <h1 class="headingUnderline"><?php echo $book['bookTitle'] ?></h1>

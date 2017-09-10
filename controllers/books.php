@@ -1,7 +1,7 @@
 <?php
 
 // Array of available actions
-$availableActions = array('addbook', 'viewbook', 'editbook', 'displaybooks');
+$availableActions = array('addbook', 'viewbook', 'editbook', 'displaybooks', 'deletebook');
 
 // Get action name from query string and set to variable
 if ( isset($_GET['action']) ) {
@@ -27,6 +27,9 @@ switch($action) {
         break;
     case "displaybooks":
         displayBooks();
+        break;
+    case "deletebook":
+        deletebook();
         break;
     default:
         displayBooks();
@@ -144,6 +147,13 @@ function addBook() {
             echo "Error:".$e -> getMessage();
             die();
         }
+
+        $_SESSION['notification'] = '"'.$bookTitle.'" has been successfully added to the database.';
+        header("location: ?controller=books&action=displaybooks");
+
+        exit;
+
+
     }
 
     $pageTitle = "Add Book | My Books";
@@ -273,6 +283,20 @@ function editBook() {
         die();
         }
 
+        try {
+            $modifyData = array(
+                'adminID' => $_SESSION['userID'],
+                'bookID' => $book['bookID']
+            );
+            insertData('bookmodify', $modifyData);
+        } catch (PDOexception $e) {
+            echo "Error:".$e -> getMessage();
+            die();
+        }
+
+        $_SESSION['notification'] = 'Changes to "'.$bookTitle.'" have been saved.';
+        header("location: ?controller=books&action=displaybooks");
+        exit;
 
     }
 
@@ -336,5 +360,64 @@ function displaybooks() {
     require_once('view/pages/head.php');
     require_once('view/pages/displaybooks.php');
     require_once('view/pages/footer.php');
+}
+
+function deletebook() {
+    GLOBAL $action, $controller;
+
+    if ( !empty($_GET['bookid']) ) {
+        $bookID = sanitiseUserInput($_GET['bookid']);
+    } else {
+        header('HTTP/1.1 404 Not Found');
+        exit;
+    }
+
+    $book = selectData('book', array(
+        'left join' => array('table2' => 'author', 'column' => 'authorID'),
+        'where'=> array('bookID' => $bookID ),
+        'return type' => 'single'
+        )
+    );
+
+    $table = 'book';
+    $condition = array('bookID' => $bookID);
+
+    try {
+        deleteData( $table, $condition);
+    } catch (PDOexception $e) {
+        echo "Error:".$e -> getMessage();
+        die();
+    }
+
+    $table = 'bookplot';
+
+    try {
+        deleteData( $table, $condition);
+    } catch (PDOexception $e) {
+        echo "Error:".$e -> getMessage();
+        die();
+    }
+
+    $table = 'bookranking';
+
+    try {
+        deleteData( $table, $condition);
+    } catch (PDOexception $e) {
+        echo "Error:".$e -> getMessage();
+        die();
+    }
+
+    $table = 'bookmodify';
+
+    try {
+        deleteData( $table, $condition);
+    } catch (PDOexception $e) {
+        echo "Error:".$e -> getMessage();
+        die();
+    }
+
+    $_SESSION['notification'] = '"'.$book['bookTitle'].'" has been successfully deleted from the database.';
+    header("location: ?controller=books&action=displaybooks");
+    exit;
 }
  ?>
