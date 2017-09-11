@@ -36,7 +36,7 @@
                 <div class="row input-row">
                     <div class="input-group col-md-6">
                         <span class="input-icon"><img src="view/images/password.png" alt=""></span>
-                        <input  type="password" name="password" value="" id="password" placeholder="Password" required minlength="8" >
+                        <input  type="password" name="password" value="" id="password" placeholder="Password" minlength="8" required >
                     </div>
                     <div class="input-group col-md-6">
                         <span class="input-icon"><img src="view/images/password.png" alt=""></span>
