@@ -8,6 +8,7 @@
                     <legend><?php if ($action == 'addbook') { ?> Add Book <?php } else { ?>Edit Book <?php } ?> </legend>
                     <div class="tabs">
                         <div id="section-1">
+                            <label>Title</label>
                             <input type="text" name="bookTitle" value="<?php if ( isset($book['bookTitle']) ) { echo $book['bookTitle']; }?>" required>
                             <label>Original Title</label>
                             <input type="text" name="originalTitle" value="<?php if ( isset($book['originalTitle']) ) { echo $book['originalTitle']; }?>" required>
@@ -72,6 +73,8 @@
                             <input type="text" name="plotSource" value="<?php if ( isset($bookplot['plotSource']) ) { echo $bookplot['plotSource']; }?>" required>
                             <label>Book Ranking</label>
                             <input type="text" name="rankingScore" value="<?php if ( isset($ranking['rankingScore']) ) { echo $ranking['rankingScore']; }?>" required>
+                            <label>Book Cover</label>
+                            <input type="text" name="imageURL" value="<?php if ( isset($book['imageURL']) ) { echo $book['imageURL']; }?>" >
                             <div class="formNav">
                                 <a href="#" id="section3Prev" class="prev-btn">Prev</a></li>
                                 <input type="submit" name="submit" value="submit">

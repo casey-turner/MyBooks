@@ -138,6 +138,7 @@ function updateData($table, $data, $conditions) {
     }
     return $update;
 }
+
 //Delete data function
 function deleteData($table, $conditions) {
     GLOBAL $db;

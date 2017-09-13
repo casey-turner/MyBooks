@@ -9,8 +9,3 @@
     </body>
 </html>
 <?php
-//Echoing session variable for debugging purposes
-echo "<pre>";
-var_dump($_SESSION);
-echo "</pre>";
- ?>

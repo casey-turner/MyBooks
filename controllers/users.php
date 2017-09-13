@@ -140,16 +140,12 @@ function register() {
 
 function logout() {
     GLOBAL $action, $controller;
+    //Kill sessions
     session_unset();
     session_destroy();
-
-    //Set page title
-    $pageTitle = "Login | My Books";
-
-    //Compile page elements
-    require_once('view/pages/head.php');
-    require_once('view/pages/admin_login.php');
-    require_once('view/pages/footer.php');
+    //Return user to the login page
+    header("location: ?controller=users&action=login");
+    exit;
 }
 
 ?>

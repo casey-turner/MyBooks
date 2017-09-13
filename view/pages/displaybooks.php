@@ -6,7 +6,7 @@
                 <p><?php echo $_SESSION['notification']; ?></p>
             </div>
         <?php
-            unset($_SESSION['notification']); 
+            unset($_SESSION['notification']);
         }
         ?>
         <div class="row">
@@ -22,7 +22,7 @@
                     if ($book['imageURL'] != '') {
                         $image = $book['imageURL'];
                     } else {
-                        $image = 'http://localhost/mybooks/view/images/default.png';
+                        $image = 'view/images/default.png';
                     }
                     ?>
                     <div class="col-lg-4 col-md-6 col-sm-6">

@@ -90,6 +90,7 @@ function addBook() {
         $genre = !empty($_POST['genre']) ? sanitiseUserInput($_POST['genre']) : null;
         $millionsSold = !empty($_POST['millionsSold']) ? sanitiseUserInput($_POST['millionsSold']) : null;
         $languageWritten = !empty($_POST['languageWritten']) ? sanitiseUserInput($_POST['languageWritten']) : null;
+        $imageURL = !empty($_POST['imageURL']) ? sanitiseUserInput($_POST['imageURL']) : null;
 
         try {
             $bookData = array(
@@ -99,6 +100,7 @@ function addBook() {
                 'genre' => $genre,
                 'millionsSold' => $millionsSold,
                 'languageWritten' => $languageWritten,
+                'imageURL' => $imageURL,
                 'authorID' => $newAuthorID
             );
             //Call insert data function
@@ -233,6 +235,7 @@ function editBook() {
         $genre = !empty($_POST['genre']) ? sanitiseUserInput($_POST['genre']) : null;
         $millionsSold = !empty($_POST['millionsSold']) ? sanitiseUserInput($_POST['millionsSold']) : null;
         $languageWritten = !empty($_POST['languageWritten']) ? sanitiseUserInput($_POST['languageWritten']) : null;
+        $imageURL = !empty($_POST['imageURL']) ? sanitiseUserInput($_POST['imageURL']) : null;
 
         try {
             $bookData = array(
@@ -242,6 +245,7 @@ function editBook() {
                 'genre' => $genre,
                 'millionsSold' => $millionsSold,
                 'languageWritten' => $languageWritten,
+                'imageURL' => $imageURL
             );
             $updateWhere = array(
                 'bookID' => $book['bookID']
@@ -355,7 +359,7 @@ function viewBook() {
     if ($book['imageURL'] != '') {
         $image = $book['imageURL'];
     } else {
-        $image = 'http://localhost/mybooks/view/images/default.png';
+        $image = 'view/images/default.png';
     }
     //Set page title
     $pageTitle = "View Book | My Books";
