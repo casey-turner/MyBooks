@@ -229,6 +229,9 @@ textarea {
 input[type=radio] {
     margin-right: 5px;
 }
+input[type=file] {
+    display: block;
+}
 .form-white-bkg {
     background-color: #fff;
     padding: 35px;
@@ -262,6 +265,33 @@ input[type=radio] {
     border-bottom-left-radius: 0px;
     border-top-left-radius: 0px;
     width: calc(100% - 40px);
+}
+/*----------------------------Image Upload--------------------------------*/
+#item-img-output {
+    width: 203px;
+    height: 297px;
+    margin-bottom: 15px;
+}
+
+.deleteImage {
+    display: none;
+    color: #fff;
+    background: #c0392b;
+    outline: none;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 2px;
+}
+.deleteImage img {
+    width: 15px;
+    padding: 1px 1px 5px 1px;
+}
+
+.showElement {
+    display: block;
+}
+input[type=file].hideElement {
+    display: none;
 }
 
 

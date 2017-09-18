@@ -19,8 +19,8 @@
                             $authorName = $author['firstName'].' '.$author['lastName'];
                         }
                     }
-                    if ($book['imageURL'] != '') {
-                        $image = $book['imageURL'];
+                    if ($book['coverImage'] != '') {
+                        $image = 'view/images/'.$book['coverImage'];
                     } else {
                         $image = 'view/images/default.png';
                     }
