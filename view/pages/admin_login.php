@@ -5,8 +5,8 @@
             <form class="user-info-form" id="admin-login-form" action="?controller=users&action=login" method="post" data-parsley-validate>
                 <legend>Admin login</legend>
                 <?php
-                GLOBAL $errorMsg;
-                if ($errorMsg) {
+
+                if ( isset($errorMsg) ) {
                  ?>
                     <div class="error-msg">
                         <p><?php echo $errorMsg;?></p>
