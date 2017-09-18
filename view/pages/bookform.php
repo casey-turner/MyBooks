@@ -74,13 +74,13 @@
                             <label>Book Ranking</label>
                             <input type="text" name="rankingScore" value="<?php if ( isset($ranking['rankingScore']) ) { echo $ranking['rankingScore']; }?>" required>
                             <label>Book Cover</label>
-                            <input type="file" class="item-img <?php if ( !empty($dogs['dogProfileImage']) ){ echo 'hideElement'; } ?>" id="coverImageSelect" accept="image/*"/>
+                            <input type="file" class="item-img <?php if ( !empty($book['coverImage']) ){ echo 'hideElement'; } ?>" id="coverImageSelect" accept="image/*"/>
                             <input type="hidden" class="deleteCoverImage" name="deleteCoverImage" value="">
                             <input type="hidden" class="coverImageOutput" name="coverImage" value="">
                             <div class=" image-output">
-                                <img src="<?php if ( !empty($book['coverImage']) ){ echo 'view/uploads/'.$book['coverImage']; } ?>" alt="" id="item-img-output" />
+                                <img src="<?php if ( !empty($book['coverImage']) ){ echo 'view/images/'.$book['coverImage']; } ?>" alt="" id="item-img-output" />
                             </div>
-                            <button type="button" name="button" class="deleteImage <?php if ( !empty($book['dogProfileImage']) ){ echo 'showElement'; } ?>"> <span><img src="view/images/remove.png" alt=""></span> Remove</button>
+                            <button type="button" name="button" class="deleteImage <?php if ( !empty($book['coverImage']) ){ echo 'showElement'; } ?>"> <span><img src="view/images/remove.png" alt=""></span> Remove</button>
                             <!-- Modal -->
                             <div id="cropImagePop" class="modal fade" tabindex="-1" role="dialog">
                                 <div class="modal-dialog" role="document">
