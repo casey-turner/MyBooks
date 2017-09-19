@@ -224,6 +224,7 @@ textarea {
     padding: 7px 10px;
     border: 1px solid #999;
     outline: none;
+    height: max-content;
 
 }
 input[type=radio] {
